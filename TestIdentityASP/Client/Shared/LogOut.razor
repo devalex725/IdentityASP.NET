@@ -1,0 +1,23 @@
+﻿@page "/authentication/logged-out"
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+
+@inject NavigationManager Navigation
+@inject SignOutSessionStateManager SignOutManager
+
+
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        await SignOut();
+    }
+
+    private async Task SignOut()
+    {
+        // Sign out the user from Microsoft Identity
+        await SignOutManager.SetSignOutState();
+
+        // Redirect to the home page after logging out
+        Navigation.NavigateTo("/");
+    }
+}
